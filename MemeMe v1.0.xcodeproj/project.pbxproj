@@ -7,13 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		792ACDB11C6A9247005A385A /* unicode.impact.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 792ACDB01C6A9247005A385A /* unicode.impact.ttf */; };
+		792ACDB21C6A9247005A385A /* unicode.impact.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 792ACDB01C6A9247005A385A /* unicode.impact.ttf */; };
 		796E7CC01BB999F000A57A6D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796E7CBF1BB999F000A57A6D /* AppDelegate.swift */; };
 		796E7CC21BB999F000A57A6D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796E7CC11BB999F000A57A6D /* ViewController.swift */; };
 		796E7CC51BB999F000A57A6D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 796E7CC31BB999F000A57A6D /* Main.storyboard */; };
 		796E7CC71BB999F000A57A6D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 796E7CC61BB999F000A57A6D /* Images.xcassets */; };
 		796E7CCA1BB999F000A57A6D /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 796E7CC81BB999F000A57A6D /* LaunchScreen.xib */; };
 		796E7CD61BB999F000A57A6D /* MemeMe_v1_0Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796E7CD51BB999F000A57A6D /* MemeMe_v1_0Tests.swift */; };
-		79EC5D4E1C69631F00832180 /* unicode.impact.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79EC5D4D1C69631F00832180 /* unicode.impact.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,6 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		792ACDB01C6A9247005A385A /* unicode.impact.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = unicode.impact.ttf; path = fonts/unicode.impact.ttf; sourceTree = "<group>"; };
 		796E7CBA1BB999F000A57A6D /* MemeMe v1.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MemeMe v1.0.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		796E7CBE1BB999F000A57A6D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		796E7CBF1BB999F000A57A6D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -37,7 +39,6 @@
 		796E7CCF1BB999F000A57A6D /* MemeMe v1.0Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MemeMe v1.0Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		796E7CD41BB999F000A57A6D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		796E7CD51BB999F000A57A6D /* MemeMe_v1_0Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeMe_v1_0Tests.swift; sourceTree = "<group>"; };
-		79EC5D4D1C69631F00832180 /* unicode.impact.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = unicode.impact.ttf; path = ../../../../../Downloads/impact/unicode.impact.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,7 +85,7 @@
 				796E7CC31BB999F000A57A6D /* Main.storyboard */,
 				796E7CC61BB999F000A57A6D /* Images.xcassets */,
 				796E7CC81BB999F000A57A6D /* LaunchScreen.xib */,
-				79EC5D4D1C69631F00832180 /* unicode.impact.ttf */,
+				792ACDB01C6A9247005A385A /* unicode.impact.ttf */,
 				796E7CBD1BB999F000A57A6D /* Supporting Files */,
 			);
 			path = "MemeMe v1.0";
@@ -198,7 +199,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				796E7CC51BB999F000A57A6D /* Main.storyboard in Resources */,
-				79EC5D4E1C69631F00832180 /* unicode.impact.ttf in Resources */,
+				792ACDB11C6A9247005A385A /* unicode.impact.ttf in Resources */,
 				796E7CCA1BB999F000A57A6D /* LaunchScreen.xib in Resources */,
 				796E7CC71BB999F000A57A6D /* Images.xcassets in Resources */,
 			);
@@ -208,6 +209,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				792ACDB21C6A9247005A385A /* unicode.impact.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

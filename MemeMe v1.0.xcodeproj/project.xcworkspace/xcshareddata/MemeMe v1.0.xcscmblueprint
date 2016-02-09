@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "EADEEE1C8814E0E84170AE460030FDC98BAF9C65",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "EADEEE1C8814E0E84170AE460030FDC98BAF9C65" : 0,
+    "924091A924C391FE0A13A402FBE0F08812F1639C" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "A4615A6E-5562-4636-BF0E-EC6FCCBB8E21",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "EADEEE1C8814E0E84170AE460030FDC98BAF9C65" : "MemeMe%20v1.0",
+    "924091A924C391FE0A13A402FBE0F08812F1639C" : "..\/Pitch%20Perfect\/Pitch%20Perfect"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "MemeMe v1.0",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "MemeMe v1.0.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/erdsjunior\/pitch-perfect.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "924091A924C391FE0A13A402FBE0F08812F1639C"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/erdsjunior\/MemeMe-v1.0.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "EADEEE1C8814E0E84170AE460030FDC98BAF9C65"
+    }
+  ]
+}
