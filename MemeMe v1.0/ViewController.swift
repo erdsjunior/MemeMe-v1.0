@@ -9,13 +9,15 @@
 import UIKit
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate,UINavigationControllerDelegate, UITextFieldDelegate{
-
+    
 /*  ########################################################
     #                                                      #
     #               @IBOutlet  &  @IBAction                #
     #                                                      #
     ########################################################
     */
+    
+    @IBOutlet weak var cancelButton: UIToolbar!
     
     @IBOutlet weak var actionButton: UIBarButtonItem!
     
@@ -32,6 +34,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,UINaviga
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     
     @IBOutlet weak var albumButton: UIBarButtonItem!
+    
+    @IBOutlet weak var memeSavedLabel: UILabel!
     
     /* SELECT IMAGE FROM CAMERA */
     @IBAction func pickAnImageFromCamera(sender: UIBarButtonItem) {
@@ -59,13 +63,24 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,UINaviga
             (activity: String?, completed: Bool, items: [AnyObject]?, error: NSError?) -> Void in
             if completed {
                 self.save(memedImage)
+       
+                self.memeSavedLabel.alpha = 1.0
+                UIView.animateWithDuration(2.5, delay: 0.7, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: [], animations: {
+                     self.memeSavedLabel.alpha = 0
+                    }, completion: nil)
+                
+               NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector:("delay:"), userInfo: nil, repeats: false)
+
                 self.dismissViewControllerAnimated(true, completion: nil)
             }
         }
     }
     
-    /* RESET EVERYTHING CASE USER PRESS CANCEL */
-    @IBAction func resetMeme(sender: UIBarButtonItem) {
+    func delay(timer: NSTimer) -> Void{
+        reset()
+    }
+    
+    func reset() -> Void{
         actionButton.enabled = false
         imageView.image = nil
         topTextField.text = "TOP"
@@ -74,6 +89,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,UINaviga
         clearTopTextField = true
         self.view.endEditing(false)
         self.view.frame.origin.y = 0
+        memeSavedLabel.alpha=0
+    }
+    
+    /* RESET EVERYTHING CASE USER PRESS CANCEL */
+    @IBAction func cancel(sender: UIBarButtonItem) {
+        reset()
     }
     
     @IBAction func touchTopTextField(sender: UITextField) {
@@ -82,18 +103,15 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,UINaviga
     @IBAction func touchBottomTextField(sender: UITextField) {
     }
     
-    var clearTopTextField = true
-    var clearBottomTextField = true
-    
 /*  ########################################################
     #                                                      #
-    #               IMAGE VIEW FUNCTIONS                   #
+    #               IMAGE VIEW VARS & FUCTIONS             #
     #                                                      #
     ########################################################
     */
     
     /* DISPLAY SELECTED IMAGE ON THE imageView */
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             imageView.contentMode = .ScaleAspectFit
             imageView.image = image
@@ -104,10 +122,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,UINaviga
     
 /*  ########################################################
     #                                                      #
-    #               TEXT FIELD FUNCTIONS                   #
+    #               TEXT FIELD VARS & FUCTIONS             #
     #                                                      #
     ########################################################
     */
+    
+    var clearTopTextField = true
+    var clearBottomTextField = true
     
     /* WHAT TO DO WHEN KEYBOARD RETURN BUTTON IS PRESSED */
     func textFieldShouldReturn(textField: UITextField) -> Bool {
@@ -161,23 +182,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,UINaviga
 
 /*  ########################################################
     #                                                      #
-    #               MEME FUCTIONS                          #
+    #               MEME VARS & FUCTIONS                   #
     #                                                      #
     ########################################################
     */
     
-    /* MEME STRUCT */
-    struct Meme {
-        var topString: String
-        var bottomString: String
-        var originalImage: UIImage
-        var memedImage: UIImage
-    }
-    
-    /* SAVE MEME INTO A STRUCT */
-    func save(memedImage: UIImage) {
-        let meme = Meme(topString: topTextField.text, bottomString: bottomTextField.text, originalImage: imageView.image!, memedImage: memedImage)
-    }
+    var meme: Meme!
     
     /* MERGE PICKIMAGE WITH TEXTS */
     func generateMemedImage() -> UIImage
@@ -202,6 +212,19 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,UINaviga
         return memedImage
     }
     
+    /* MEME STRUCT */
+    struct Meme {
+        var topString: String
+        var bottomString: String
+        var originalImage: UIImage
+        var memedImage: UIImage
+    }
+    
+    /* SAVE MEME INTO A STRUCT */
+    func save(memedImage: UIImage) {
+        meme = Meme(topString: topTextField.text!, bottomString: bottomTextField.text!, originalImage: imageView.image!, memedImage: memedImage)
+    }
+    
 /*  ########################################################
     #                                                      #
     #               OVERRIDE FUCTIONS                      #
@@ -210,7 +233,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,UINaviga
     */
 
     /* HIDE THE KEYBOARD WHEN THE USER TOUCHES ANYWHERE IN THE VIEW */
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         self.view.frame.origin.y = 0
         if bottomTextField.isFirstResponder(){
             textFieldShouldReturn(bottomTextField)
@@ -231,6 +254,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,UINaviga
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        memeSavedLabel.alpha=0
         
         /* DISABLE actionButton */
         actionButton.enabled = false
