@@ -10,6 +10,17 @@ import UIKit
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate,UINavigationControllerDelegate, UITextFieldDelegate{
     
+    
+    override func shouldAutorotate() -> Bool {
+        return true
+    }
+    
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return [UIInterfaceOrientationMask.Portrait ,UIInterfaceOrientationMask.PortraitUpsideDown,
+        UIInterfaceOrientationMask.LandscapeLeft,UIInterfaceOrientationMask.LandscapeRight]
+    }
+    
+    
 /*  ########################################################
     #                                                      #
     #               @IBOutlet  &  @IBAction                #
@@ -17,7 +28,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,UINaviga
     ########################################################
     */
     
-    @IBOutlet weak var cancelButton: UIToolbar!
+    @IBOutlet weak var cancelButton: UIBarButtonItem!
     
     @IBOutlet weak var actionButton: UIBarButtonItem!
     
@@ -50,14 +61,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,UINaviga
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-        self.presentViewController(imagePicker, animated: true, completion: nil)
+        presentViewController(imagePicker, animated: true, completion: nil)
     }
     
     /* SELECT ACTION (e.g. SAVE, SHARE) */
     @IBAction func activityView(sender: UIBarButtonItem) {
         let memedImage = self.generateMemedImage()
         let activityViewController = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
-        self.presentViewController(activityViewController, animated: true, completion: nil)
+        presentViewController(activityViewController, animated: true, completion: nil)
         
         activityViewController.completionWithItemsHandler = {
             (activity: String?, completed: Bool, items: [AnyObject]?, error: NSError?) -> Void in
@@ -87,8 +98,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,UINaviga
         bottomTextField.text = "BOTTOM"
         clearBottomTextField = true
         clearTopTextField = true
-        self.view.endEditing(false)
-        self.view.frame.origin.y = 0
+        view.endEditing(false)
+        view.frame.origin.y = 0
         memeSavedLabel.alpha=0
     }
     
@@ -115,7 +126,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,UINaviga
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             imageView.contentMode = .ScaleAspectFit
             imageView.image = image
-            self.dismissViewControllerAnimated(true, completion: nil)
+            dismissViewControllerAnimated(true, completion: nil)
             actionButton.enabled = true
         }
     }
@@ -132,8 +143,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,UINaviga
     
     /* WHAT TO DO WHEN KEYBOARD RETURN BUTTON IS PRESSED */
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        self.unsubscribeFromKeyboardNotifications()
-        self.view.endEditing(false)
+        unsubscribeFromKeyboardNotifications()
+        view.endEditing(false)
         return false
     }
    
@@ -177,7 +188,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,UINaviga
     /* HIDE THE KEYBOARD NO MATTER WHO IS THE FIRST RESPONDER */
     /* note: IF CHECKING FIRST RESPONDER IS ACTIVATED AND THE USER HITS bottomTextField -> topTextField -> Return THE VIEW DOES NOT MOVE BACK SINCE THE topTextField IS NOW FIRST RESPONDER */
     func keyboardWillHide(notification: NSNotification) {
-            self.view.frame.origin.y = 0
+            view.frame.origin.y = 0
     }
 
 /*  ########################################################
@@ -194,8 +205,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,UINaviga
     {
         
         /* HIDE TOOLBAR AND NAVBAR */
-        self.topToolbar.hidden = true
-        self.bottomToolbar.hidden = true
+        topToolbar.hidden = true
+        bottomToolbar.hidden = true
         UIApplication.sharedApplication().statusBarHidden = true
         
         /* RENDER VIEW TO AN IMAGE */
@@ -205,8 +216,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,UINaviga
         UIGraphicsEndImageContext()
         
         /* UNHIDE TOOLBAR AND NAVBAR */
-        self.topToolbar.hidden = false
-        self.bottomToolbar.hidden = false
+        topToolbar.hidden = false
+        bottomToolbar.hidden = false
         UIApplication.sharedApplication().statusBarHidden = false
         
         return memedImage
@@ -234,7 +245,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,UINaviga
 
     /* HIDE THE KEYBOARD WHEN THE USER TOUCHES ANYWHERE IN THE VIEW */
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        self.view.frame.origin.y = 0
+        view.frame.origin.y = 0
         if bottomTextField.isFirstResponder(){
             textFieldShouldReturn(bottomTextField)
         }
@@ -249,7 +260,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,UINaviga
         
         super.viewWillAppear(animated)
         
-        self.subscribeToKeyboardNotifications()
+        subscribeToKeyboardNotifications()
     }
     
     override func viewDidLoad() {
