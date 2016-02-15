@@ -9,7 +9,12 @@
 import UIKit
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate,UINavigationControllerDelegate, UITextFieldDelegate{
-    
+  
+/*  ########################################################                                                      #                                                      #
+    #               Device Rotation Methods                #
+    #                                                      #
+    ########################################################
+    */
     
     override func shouldAutorotate() -> Bool {
         return true
@@ -76,11 +81,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,UINaviga
                 self.save(memedImage)
        
                 self.memeSavedLabel.alpha = 1.0
-                UIView.animateWithDuration(2.5, delay: 0.7, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: [], animations: {
-                     self.memeSavedLabel.alpha = 0
+                UIView.animateWithDuration(2, delay: 0.5, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: [], animations: {
+                    self.memeSavedLabel.alpha = 0
                     }, completion: nil)
                 
-               NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector:("delay:"), userInfo: nil, repeats: false)
+               NSTimer.scheduledTimerWithTimeInterval(0.2, target: self, selector:("delay:"), userInfo: nil, repeats: false)
 
                 self.dismissViewControllerAnimated(true, completion: nil)
             }
