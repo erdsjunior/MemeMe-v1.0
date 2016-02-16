@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegate,UINavigationControllerDelegate, UITextFieldDelegate{
   
 /*  ########################################################                                                      #                                                      #
@@ -17,7 +18,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     */
     
     override func prefersStatusBarHidden() -> Bool {
-        return true     // status bar should be hidden
+        return true
     }
     
     override func shouldAutorotate() -> Bool {
@@ -69,30 +70,37 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     }
     
     /* SELECT ACTION (e.g. SAVE, SHARE) */
+    
     @IBAction func activityView(sender: UIBarButtonItem) {
-        let memedImage = self.generateMemedImage()
+        
+        /* HIDE TOOLBAR AND NAVBAR */
+        topToolbar.hidden = true
+        bottomToolbar.hidden = true
+        
+        /* RENDER VIEW TO AN IMAGE */
+        UIGraphicsBeginImageContext(view.frame.size)
+        view.drawViewHierarchyInRect(view.frame, afterScreenUpdates: true)
+        
+        let mEModel = MemeEditorModel()
+        let memedImage = mEModel.generateMemedImage()
+        
         let activityViewController = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
         presentViewController(activityViewController, animated: true, completion: nil)
         
         activityViewController.completionWithItemsHandler = {
             (activity: String?, completed: Bool, items: [AnyObject]?, error: NSError?) -> Void in
             if completed {
-                self.save(memedImage)
+                mEModel.save(memedImage,topString: self.topTextField.text!, bottomString: self.bottomTextField.text!, originalImage: self.imageView.image!)
        
                 self.memeSavedLabel.alpha = 1.0
                 UIView.animateWithDuration(2, delay: 0.5, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: [], animations: {
                     self.memeSavedLabel.alpha = 0
                     }, completion: nil)
                 
-               NSTimer.scheduledTimerWithTimeInterval(0.2, target: self, selector:("delay:"), userInfo: nil, repeats: false)
-
+                self.reset()
                 self.dismissViewControllerAnimated(true, completion: nil)
             }
         }
-    }
-    
-    func delay(timer: NSTimer) -> Void{
-        reset()
     }
     
     /* RESET EVERYTHING CASE USER PRESS CANCEL */
@@ -116,6 +124,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 
     /* RESET MemeMe */
     func reset() -> Void{
+        topToolbar.hidden = false
+        bottomToolbar.hidden = false
         actionButton.enabled = false
         imageView.image = nil
         topTextField.text = "TOP"
@@ -218,50 +228,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         }
     }
 
-/*  ########################################################
-    #                                                      #
-    #               MEME VARS & FUCTIONS                   #
-    #                                                      #
-    ########################################################
-    */
-    
-    var meme: Meme!
-    
-    /* MERGE PICKIMAGE WITH TEXTS */
-    func generateMemedImage() -> UIImage
-    {
-        
-        /* HIDE TOOLBAR AND NAVBAR */
-        topToolbar.hidden = true
-        bottomToolbar.hidden = true
-        UIApplication.sharedApplication().statusBarHidden = true
-        
-        /* RENDER VIEW TO AN IMAGE */
-        UIGraphicsBeginImageContext(self.view.frame.size)
-        view.drawViewHierarchyInRect(self.view.frame, afterScreenUpdates: true)
-        let memedImage : UIImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        /* UNHIDE TOOLBAR AND NAVBAR */
-        topToolbar.hidden = false
-        bottomToolbar.hidden = false
-        UIApplication.sharedApplication().statusBarHidden = false
-        
-        return memedImage
-    }
-    
-    /* MEME STRUCT */
-    struct Meme {
-        var topString: String
-        var bottomString: String
-        var originalImage: UIImage
-        var memedImage: UIImage
-    }
-    
-    /* SAVE MEME INTO A STRUCT */
-    func save(memedImage: UIImage) {
-        meme = Meme(topString: topTextField.text!, bottomString: bottomTextField.text!, originalImage: imageView.image!, memedImage: memedImage)
-    }
+
     
 /*  ########################################################
     #                                                      #
