@@ -11,10 +11,14 @@ import UIKit
 class ViewController: UIViewController, UIImagePickerControllerDelegate,UINavigationControllerDelegate, UITextFieldDelegate{
   
 /*  ########################################################                                                      #                                                      #
-    #               Device Rotation Methods                #
+    #                      UI Methods                      #
     #                                                      #
     ########################################################
     */
+    
+    override func prefersStatusBarHidden() -> Bool {
+        return true     // status bar should be hidden
+    }
     
     override func shouldAutorotate() -> Bool {
         return true
