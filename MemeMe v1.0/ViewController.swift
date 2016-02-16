@@ -57,20 +57,15 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     @IBOutlet weak var memeSavedLabel: UILabel!
     
+    
     /* SELECT IMAGE FROM CAMERA */
     @IBAction func pickAnImageFromCamera(sender: UIBarButtonItem) {
-        let imagePicker = UIImagePickerController()
-        imagePicker.delegate = self
-        imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
-        self.presentViewController(imagePicker, animated: true, completion: nil)
+            selectImage(UIImagePickerControllerSourceType.Camera)
     }
 
     /* SELECT IMAGE FROM ALBUM */
     @IBAction func pickAnImageFromAlbum(sender: UIBarButtonItem) {
-        let imagePicker = UIImagePickerController()
-        imagePicker.delegate = self
-        imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-        presentViewController(imagePicker, animated: true, completion: nil)
+        selectImage(UIImagePickerControllerSourceType.PhotoLibrary)
     }
     
     /* SELECT ACTION (e.g. SAVE, SHARE) */
@@ -100,18 +95,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         reset()
     }
     
-    func reset() -> Void{
-        actionButton.enabled = false
-        imageView.image = nil
-        topTextField.text = "TOP"
-        bottomTextField.text = "BOTTOM"
-        clearBottomTextField = true
-        clearTopTextField = true
-        view.endEditing(false)
-        view.frame.origin.y = 0
-        memeSavedLabel.alpha=0
-    }
-    
     /* RESET EVERYTHING CASE USER PRESS CANCEL */
     @IBAction func cancel(sender: UIBarButtonItem) {
         reset()
@@ -129,6 +112,28 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     #                                                      #
     ########################################################
     */
+    
+
+    /* RESET MemeMe */
+    func reset() -> Void{
+        actionButton.enabled = false
+        imageView.image = nil
+        topTextField.text = "TOP"
+        bottomTextField.text = "BOTTOM"
+        clearBottomTextField = true
+        clearTopTextField = true
+        view.endEditing(false)
+        view.frame.origin.y = 0
+        memeSavedLabel.alpha=0
+    }
+    
+    /* SELECT IMAGE TO BE DISPLAYED */
+    func selectImage(picker: UIImagePickerControllerSourceType ){
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.sourceType = picker
+        self.presentViewController(imagePicker, animated: true, completion: nil)
+    }
     
     /* DISPLAY SELECTED IMAGE ON THE imageView */
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
@@ -149,6 +154,18 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     
     var clearTopTextField = true
     var clearBottomTextField = true
+    
+    /* SETUP topTextField AND bottomTextField  */
+    func initialiseTextField(textField: UITextField){
+        let memeTextAttributes = [
+            NSStrokeWidthAttributeName : -3.0,
+            NSStrokeColorAttributeName : UIColor.blackColor(),
+            NSForegroundColorAttributeName : UIColor.whiteColor(),
+            NSFontAttributeName : UIFont(name: "Impact", size: 40)!
+        ]
+        textField.defaultTextAttributes = memeTextAttributes
+        textField.textAlignment = NSTextAlignment.Center
+    }
     
     /* WHAT TO DO WHEN KEYBOARD RETURN BUTTON IS PRESSED */
     func textFieldShouldReturn(textField: UITextField) -> Bool {
@@ -195,9 +212,10 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     }
     
     /* HIDE THE KEYBOARD NO MATTER WHO IS THE FIRST RESPONDER */
-    /* note: IF CHECKING FIRST RESPONDER IS ACTIVATED AND THE USER HITS bottomTextField -> topTextField -> Return THE VIEW DOES NOT MOVE BACK SINCE THE topTextField IS NOW FIRST RESPONDER */
     func keyboardWillHide(notification: NSNotification) {
+        if bottomTextField.isFirstResponder(){
             view.frame.origin.y = 0
+        }
     }
 
 /*  ########################################################
@@ -279,23 +297,15 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         /* DISABLE actionButton */
         actionButton.enabled = false
         
-        /* SETUP topTextField AND bottomTextField  */
-        let memeTextAttributes = [
-            NSStrokeWidthAttributeName : -3.0,
-            NSStrokeColorAttributeName : UIColor.blackColor(),
-            NSForegroundColorAttributeName : UIColor.whiteColor(),
-            NSFontAttributeName : UIFont(name: "Impact", size: 40)!
-        ]
-        
         topTextField.delegate = self
         bottomTextField.delegate = self
         
-        topTextField.defaultTextAttributes = memeTextAttributes
-        topTextField.text = "TOP"
-        topTextField.textAlignment = NSTextAlignment.Center
+        initialiseTextField(topTextField)
+        initialiseTextField(bottomTextField)
         
-        bottomTextField.defaultTextAttributes = memeTextAttributes
+        
+        topTextField.text = "TOP"
+        
         bottomTextField.text = "BOTTOM"
-        bottomTextField.textAlignment = NSTextAlignment.Center
     }
 }
