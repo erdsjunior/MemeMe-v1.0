@@ -166,7 +166,9 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     var clearBottomTextField = true
     
     /* SETUP topTextField AND bottomTextField  */
-    func initialiseTextField(textField: UITextField){
+    func initialiseTextField(textField: UITextField, text: String){
+        textField.delegate = self
+        
         let memeTextAttributes = [
             NSStrokeWidthAttributeName : -3.0,
             NSStrokeColorAttributeName : UIColor.blackColor(),
@@ -175,6 +177,17 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         ]
         textField.defaultTextAttributes = memeTextAttributes
         textField.textAlignment = NSTextAlignment.Center
+        textField.autocapitalizationType = .AllCharacters
+        textField.adjustsFontSizeToFitWidth = true
+        textField.text = text
+        textField.setContentCompressionResistancePriority(UILayoutPriorityDefaultLow, forAxis:UILayoutConstraintAxis.Horizontal)
+    }
+    
+    
+    /* CAPITALIZE ALL TEXT FIELDS */
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+            textField.text = (textField.text! as NSString).stringByReplacingCharactersInRange(range, withString: string.uppercaseString)
+            return false
     }
     
     /* WHAT TO DO WHEN KEYBOARD RETURN BUTTON IS PRESSED */
@@ -264,15 +277,9 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         /* DISABLE actionButton */
         actionButton.enabled = false
         
-        topTextField.delegate = self
-        bottomTextField.delegate = self
+        /* INITIALISE TOP AND BOTTOM TEXT FIELDS */
+        initialiseTextField(topTextField, text: "TOP")
+        initialiseTextField(bottomTextField, text: "BOTTOM")
         
-        initialiseTextField(topTextField)
-        initialiseTextField(bottomTextField)
-        
-        
-        topTextField.text = "TOP"
-        
-        bottomTextField.text = "BOTTOM"
     }
 }

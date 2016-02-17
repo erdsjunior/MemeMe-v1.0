@@ -31,9 +31,6 @@
                             </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="BOTTOM" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jKc-a8-tws">
                                 <rect key="frame" x="0.0" y="466" width="600" height="38"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="600" id="hiu-Kq-bX6"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" name="Impact" family="Impact" pointSize="40"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <variation key="heightClass=regular" fixedFrame="YES">
@@ -66,9 +63,6 @@
                             </toolbar>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="TOP" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZLJ-2Q-mQh">
                                 <rect key="frame" x="0.0" y="72" width="600" height="38"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="600" id="QWt-AT-6xA"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" name="Impact" family="Impact" pointSize="40"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <variation key="heightClass=regular" fixedFrame="YES">
@@ -107,11 +101,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="XIl-5h-NFL" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="24F-KX-PcN"/>
+                            <constraint firstItem="jKc-a8-tws" firstAttribute="width" secondItem="cKk-hz-q9t" secondAttribute="width" id="9Q6-ss-S4Q"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="XIl-5h-NFL" secondAttribute="bottom" id="C9P-hU-GHq"/>
                             <constraint firstItem="jKc-a8-tws" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="FWt-hp-OVB"/>
                             <constraint firstItem="cKk-hz-q9t" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="LQy-Qe-6sQ"/>
                             <constraint firstItem="XIl-5h-NFL" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="Pzu-fM-U1E"/>
                             <constraint firstItem="pp5-Qd-5FE" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="QCs-ot-wco"/>
+                            <constraint firstItem="ZLJ-2Q-mQh" firstAttribute="width" secondItem="cKk-hz-q9t" secondAttribute="width" id="R2I-dC-ek8"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="jKc-a8-tws" secondAttribute="bottom" constant="52" id="V3e-DT-6jU"/>
                             <constraint firstItem="cKk-hz-q9t" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="XhW-iS-xtq"/>
                             <constraint firstItem="ZLJ-2Q-mQh" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="52" id="XnF-nj-2dl"/>
